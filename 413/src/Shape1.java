@@ -10,11 +10,6 @@ abstract class Shape1 {
 	public abstract void draw();
 };
 
-class Rectangle extends Shape {
-	public Rectangle(int x, int y) {
-		super(x, y);
-		// TODO Auto-generated constructor stub
-	}
 
 	private int width, height;
 
