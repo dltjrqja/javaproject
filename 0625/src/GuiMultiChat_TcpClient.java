@@ -23,14 +23,14 @@ public class GuiMultiChat_TcpClient {
 	static DataOutputStream out;
 
 	public static void main(String args[]) {
-		nick = JOptionPane.showInputDialog("È¿°Ç ÇöÈ« ¼º°ü°è?");
+		nick = JOptionPane.showInputDialog("ì„œë²„ì…ë‹ˆë‹¤.");
 		FrClient f = new FrClient(nick);
 		Socket socket;
 		try {
 			String serverIp = "127.0.0.1";
-			// ¼ÒÄÏÀ» »ı¼ºÇÏ¿© ¿¬°áÀ» ¿äÃ»ÇÑ´Ù.
+			// ì†Œì¼“ì„ ìƒì„±í•˜ì—¬ ì—°ê²°ì„ ìš”ì²­í•œë‹¤.
 			socket = new Socket(serverIp, 7474);
-			System.out.println("¼­¹ö¿¡ ¿¬°áµÇ¾ú½À´Ï´Ù.");
+			System.out.println("ì„œë²„ì— ì—°ê²°ë˜ì—ˆìŠµë‹ˆë‹¤.");
 
 			Thread sender = new ClientSender(socket, nick);
 			sender.start();
@@ -38,9 +38,9 @@ public class GuiMultiChat_TcpClient {
 			receiver.start();
 		} catch (ConnectException e) {
 			e.printStackTrace();
-			System.out.println("Á¢¼Ó¿¡·¯");
+			System.out.println("ì ‘ì†ì—ëŸ¬");
 		} catch (Exception e) {
-			System.out.println("¿¡·¯´Â ¿¡·¯");
+			System.out.println("ì—ëŸ¬ëŠ” ì—ëŸ¬");
 		}
 	} // main
 
@@ -54,7 +54,7 @@ public class GuiMultiChat_TcpClient {
 				out = new DataOutputStream(socket.getOutputStream());
 				this.name = name;
 			} catch (Exception e) {
-				System.out.println("Å¬¶óÀÌ¾ğÆ® »ı¼ºÀÚ Áß ¿¡·¯");
+				System.out.println("í´ë¼ì´ì–¸íŠ¸ ìƒì„±ì ì¤‘ ì—ëŸ¬");
 			}
 		}
 
@@ -68,7 +68,7 @@ public class GuiMultiChat_TcpClient {
 					out.writeUTF("[" + name + "]" + scanner.nextLine());
 				}
 			} catch (IOException e) {
-				System.out.println("Å¬¶óÀÌ¾ğÆ® ¼¾´õ ½ÇÇàÁß io ¿¡·¯");
+				System.out.println("í´ë¼ì´ì–¸íŠ¸ ì„¼ë” ì‹¤í–‰ì¤‘ io ì—ëŸ¬");
 			}
 		} // run()
 	}
@@ -82,7 +82,7 @@ public class GuiMultiChat_TcpClient {
 			try {
 				in = new DataInputStream(socket.getInputStream());
 			} catch (IOException e) {
-				System.out.println("Å¬¶óÀÌ¾ğÆ® ¸®½Ã¹ö ½ÇÇàÁß ÀÔÃâ·Â¿¡·¯");
+				System.out.println("í´ë¼ì´ì–¸íŠ¸ ë¦¬ì‹œë²„ ì‹¤í–‰ì¤‘ ì…ì¶œë ¥ì—ëŸ¬");
 			}
 		}
 
@@ -93,7 +93,7 @@ public class GuiMultiChat_TcpClient {
 					System.out.println(s);
 					ta.append(s + "\n");
 				} catch (IOException e) {
-					System.out.println("Å¬¶óÀÌ¾ğÆ® ¸®½Ã¹ö ¸Ş¼Òµå ½ÇÇàÁß ÀÔÃâ·Â ¿¡·¯");
+					System.out.println("í´ë¼ì´ì–¸íŠ¸ ë¦¬ì‹œë²„ ë©”ì†Œë“œ ì‹¤í–‰ì¤‘ ì…ì¶œë ¥ ì—ëŸ¬");
 
 				}
 			}
@@ -106,7 +106,7 @@ static class FrClient extends JFrame implements ActionListener {
 	public FrClient(String nick) {
 		setSize(600, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle(nick + " ÀÇ Ã¤ÆÃ¹æ Å¬¶óÀÌ¾ğÆ®");
+		setTitle(nick + " ì˜ ì±„íŒ…ë°© í´ë¼ì´ì–¸íŠ¸");
 		setLayout(new BorderLayout());
 
 		JLabel label = new JLabel("This is a server!");
@@ -117,7 +117,7 @@ static class FrClient extends JFrame implements ActionListener {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		JLabel label_name = new JLabel(nick + "´Ô");
+		JLabel label_name = new JLabel(nick + "ë‹˜");
 		panel.add(label_name, BorderLayout.WEST);
 		panel.add(tf, BorderLayout.SOUTH);
 		
@@ -129,10 +129,10 @@ static class FrClient extends JFrame implements ActionListener {
 	public void FrServer() {
 		setSize(600, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Ã¤ÆÃ¹æ ¼­¹ö!");
+		setTitle("ì±„íŒ…ë°© ì„œë²„!");
 		setLayout(new BorderLayout());
 
-		JLabel label = new JLabel("¼­¹öÀÔ´Ï´Ù");
+		JLabel label = new JLabel("ì„œë²„ì…ë‹ˆë‹¤");
 		ta = new JTextArea(25, 40);
 		tf = new JTextField(25);
 
@@ -149,7 +149,7 @@ static class FrClient extends JFrame implements ActionListener {
 				out.writeUTF("["+nick+"]"+tf.getText());
 				tf.setText("");
 			}catch(IOException e1){
-				System.out.println("gui »ó¿¡¼­ ¸Ş½ÃÁö º¸³»´Â°Ô ¿¡·¯");
+				System.out.println("gui ìƒì—ì„œ ë©”ì‹œì§€ ë³´ë‚´ëŠ”ê²Œ ì—ëŸ¬");
 			}
 		} 
 	}
